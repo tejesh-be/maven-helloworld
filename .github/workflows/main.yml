@@ -53,7 +53,7 @@ jobs:
         password: ${{ secrets.NEXUS_PASSWORD }}
         format: maven2
         repository: maven-demo
-        coordinates: groupId=com.efsavage artifactId=app version=1.1.1
+        coordinates: groupId=com.efsavage artifactId=hello-world-war version=1.1.1
         assets: extension=War
         filename: ./target/*.war 
 
