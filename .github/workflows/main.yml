@@ -30,6 +30,7 @@ jobs:
           echo "VERSION=$VERSION"
       - name: Printing env value
         run: |
+          echo $GITHUB_ENV
           echo "group_id = ${{env.GROUP_ID}}"
           echo "artifact_id = ${{env. ARTIFACT_ID}}"
           echo "version = ${{env.VERSION}}"
