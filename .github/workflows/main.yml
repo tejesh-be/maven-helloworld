@@ -12,6 +12,8 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: exporting data to github env
+        run: echo "GROUP_ID=`less pom.xml | grep -i "groupId" | head -n 1 | grep -oP '(?<=<groupId>).*?(?=</groupId>)'`" >> $GITHUB_ENV && echo "ARTIFACT_ID=`less pom.xml | grep -i "artifactId" | head -n 1 | grep -oP '(?<=<artifactId>).*?(?=</artifactId>)'`" >> $GITHUB_ENV && echo "VERSION=`less pom.xml | grep -iw "version" | head -n 1 | grep -oP '(?<=<version>).*?(?=</version>)'`" >> $GITHUB_ENV && env
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
@@ -42,7 +44,7 @@ jobs:
           password: ${{ secrets.NEXUSPASSWORD }}
           format: maven2
           repository: maven-demo
-          coordinates: groupId=com.efsavage artifactId=hello-world-war version=1.1.2
+          coordinates: groupId=${{ env.GROUP_ID }} artifactId=${{ env.ARTIFACT_ID }} version=${{ env.VERSION }}
           assets: extension=war
           filename: ./target/*.war
         
