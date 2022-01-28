@@ -55,7 +55,7 @@ jobs:
           password: ${{ secrets.NEXUSPASSWORD }}
           format: maven2
           repository: maven-demo
-          coordinates: groupId=${{ env.GROUP_ID }} artifactId=${{ env.ARTIFACT_ID }} version=${{ env.VERSION }}
+          coordinates: groupId="${{ env.GROUP_ID }}" artifactId="${{ env.ARTIFACT_ID }}" version="${{ env.VERSION }}"
           assets: extension=war
           filename: ./target/*.war
         
