@@ -18,7 +18,7 @@
       <repository>
         <id>maven-demo</id>
         <name>maven-demo</name>
-	<url>http://34.125.221.125:8081/repository/maven-demo/</url>
+	<url>http://${{ secrets.NEXUSSERVERIP }}:8081/repository/maven-demo/</url>
       </repository>
 
   </distributionManagement>
