@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          
       - name: exporting data to github env
         run: |
           echo "export GROUP_ID=$(less pom.xml | grep -i "groupId" | head -n 1 | grep -oP '(?<=<groupId>).*?(?=</groupId>)')" 
@@ -23,17 +24,7 @@ jobs:
           echo "export VERSION=$(less pom.xml | grep -iw "version" | head -n 1 | grep -oP '(?<=<version>).*?(?=</version>)')" 
           export VERSION=$(less pom.xml | grep -iw "version" | head -n 1 | grep -oP '(?<=<version>).*?(?=</version>)') >> $GITHUB_ENV
           
-          env
           
-          echo "GROUP_ID=$GROUP_ID"
-          echo "ARTIFACT_ID=$ARTIFACT_ID"
-          echo "VERSION=$VERSION"
-      - name: Printing env value
-        run: |
-          cat $GITHUB_ENV
-          echo "group_id = ${{env.GROUP_ID}}"
-          echo "artifact_id = ${{env. ARTIFACT_ID}}"
-          echo "version = ${{env.VERSION}}"
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
@@ -62,19 +53,6 @@ jobs:
           serverUrl: http://34.125.221.125:8081
           username: admin
           password: ${{ secrets.NEXUSPASSWORD }}
-          format: maven2
-          repository: maven-demo
-          coordinates: groupId=$GROUP_ID artifactId=$ARTIFACT_ID version=$VERSION
-          assets: extension=war
-          filename: ./target/*.war
-          run: |
-            echo "export GROUP_ID=$(less pom.xml | grep -i "groupId" | head -n 1 | grep -oP '(?<=<groupId>).*?(?=</groupId>)')" 
-            export GROUP_ID=$(less pom.xml | grep -i "groupId" | head -n 1 | grep -oP '(?<=<groupId>).*?(?=</groupId>)') >> $GITHUB_ENV
-            echo "export ARTIFACT_ID=$(less pom.xml | grep -i "ArtifactId" | head -n 1 | grep -oP '(?<=<artifactId>).*?(?=</artifactId>)')" 
-            export ARTIFACT_ID=$(less pom.xml | grep -i "ArtifactId" | head -n 1 | grep -oP '(?<=<artifactId>).*?(?=</artifactId>)') >> $GITHUB_ENV
-          
-            echo "export VERSION=$(less pom.xml | grep -iw "version" | head -n 1 | grep -oP '(?<=<version>).*?(?=</version>)')" 
-            export VERSION=$(less pom.xml | grep -iw "version" | head -n 1 | grep -oP '(?<=<version>).*?(?=</version>)') >> $GITHUB_ENV
-        
-        
-        
+          applicationId: maven-demo
+          stage: Deploy
+          target: ./target/
