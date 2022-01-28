@@ -5,7 +5,7 @@
         <artifactId>hello-world-war</artifactId>
         <version>1.1.1</version>
         <packaging>war</packaging>
-        <name>Hello World Web Application Repository</name>
+        <name>Hello World Web Application</name>
         <description>Simplest possible Java Webapp</description>
 
     <distributionManagement>
