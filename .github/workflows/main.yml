@@ -44,14 +44,14 @@ jobs:
         
       - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=maven-sonar -Dsonar.qualitygate.wait=true        
       - name: Nexus Repo Publish
         uses: sonatype-nexus-community/nexus-repo-github-action@master
         with:
-          serverUrl: http://34.125.221.125:8081
+          serverUrl: http://34.125.201.74:8081
           username: admin
           password: ${{ secrets.NEXUSPASSWORD }}
           format: maven2
