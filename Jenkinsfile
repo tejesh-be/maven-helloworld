@@ -3,19 +3,19 @@ pipeline {
     stages {
         stage('Git Clone') {
             steps {
-                git 'https://github.com/submah/maven-helloworld.git'
+                git 'https://github.com/c4devops/maven-helloworld.git'
             }
             
         }
         stage('Maven Build') {
             steps {
-                sh 'mvn clean package deploy' 
+                sh 'mvn clean package' 
             }
             
         }
         stage('Deploying to Tomcat') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'jenkins', path: '', url: 'http://34.125.110.229:8080')], contextPath: 'devops123', war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'jenkins', path: '', url: 'http://34.125.40.9:8090/')], contextPath: 'pipeline', war: '**/*.war'
             }
             
         }
