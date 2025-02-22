@@ -13,12 +13,12 @@ pipeline {
             }
             
         }
-        #stage('Deploying to Tomcat') {
-        #    steps {
-        #        deploy adapters: [tomcat9(credentialsId: 'jenkins', path: '', url: 'http://34.125.40.9:8090/')], contextPath: 'pipeline', war: '**/*.war'
-        #   }
+        stage('Deploying to Tomcat') {
+            steps {
+                deploy adapters: [tomcat9(credentialsId: 'jenkins', path: '', url: 'http://34.125.40.9:8090/')], contextPath: 'pipeline', war: '**/*.war'
+           }
             
-        #}
+        }
         
     }
     
