@@ -4,7 +4,7 @@ pipeline {
         stage('Git Clone') {
             steps {
                 // git 'https://github.com/c4devops/maven-helloworld.git'
-                git 'https://github.com/tejesh-be/maven-demo.git'
+                git 'https://github.com/tejesh-be/maven-helloworld.git'
             }
             
         }
